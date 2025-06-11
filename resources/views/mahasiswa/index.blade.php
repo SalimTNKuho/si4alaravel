@@ -71,7 +71,7 @@
                             </form>
                             @endcan
                         </td>
-                        <td><img src="images//{{ $item->foto }}" width="65px"></td>
+                        <td><img src="{{ $item->foto }}" width="65px"></td>
                     </tr>
                 @endforeach
                 </table>    
