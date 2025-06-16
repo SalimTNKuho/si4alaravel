@@ -1,5 +1,5 @@
-@extends('layouts.app') {{-- Assuming AdminLTE 4 layout is named 'app' --}}
-@section('title', 'Edit Nilai')
+@extends('layout.main') {{-- Assuming AdminLTE 4 layout is named 'app' --}}
+@section('title', 'Nilai')
 
 @section('content')
 <div class="content-wrapper">
@@ -11,8 +11,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('nilai.index') }}">Nilai</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('nilai.store') }}">Nilai</a></li>
                         <li class="breadcrumb-item active">Edit Nilai</li>
                     </ol>
                 </div>

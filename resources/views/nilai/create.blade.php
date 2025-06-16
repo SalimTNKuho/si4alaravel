@@ -11,7 +11,6 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                         <li class="breadcrumb-item active">Create Nilai</li>
                     </ol>
                 </div>
@@ -29,15 +28,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="student_id">Student ID</label>
-                            <input type="text" name="student_id" id="student_id" class="form-control" placeholder="Enter Student ID" required>
+                            <input type="text" name="mahasiswa_id" id="mahasiswa_id" class="form-control" placeholder="Enter Student ID" required>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter Subject" required>
+                            <label for="subject">Konten</label>
+                            <input type="text" name="materi_id" id="materi_id" class="form-control" placeholder="Enter Subject" required>
                         </div>
                         <div class="form-group">
-                            <label for="score">Score</label>
-                            <input type="number" name="score" id="score" class="form-control" placeholder="Enter Score" required>
+                            <label for="score">Nilai</label>
+                            <input type="number" name="nilai_id" id="nilai_id" class="form-control" placeholder="Enter Score" required>
                         </div>
                     </div>
                     <div class="card-footer">
