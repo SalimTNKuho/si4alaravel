@@ -10,25 +10,33 @@ use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
-    protected $materi;
-    protected $mahasiswa;
-    protected $prodi;
-    protected $nilai;
+    // protected $materi;
+    // protected $mahasiswa;
+    // protected $prodi;
+    // protected $nilai;
 
-    public function __construct(Materi $materi, Mahasiswa $mahasiswa, Prodi $prodi, Nilai $nilai)
-    {
-        $this->materi = $materi;
-        $this->mahasiswa = $mahasiswa;
-        $this->prodi = $prodi;
-        $this->nilai = $nilai;
-    }
+    // /**
+    //  * Create a new controller instance.
+    //  *
+    //  * @param Materi $materi
+    //  * @param Mahasiswa $mahasiswa
+    //  * @param Prodi $prodi
+    //  * @param Nilai $nilai
+    //  */
+    // public function __construct(Materi $materi, Mahasiswa $mahasiswa, Prodi $prodi, Nilai $nilai)
+    // {
+    //     $this->materi = $materi;
+    //     $this->mahasiswa = $mahasiswa;
+    //     $this->prodi = $prodi;
+    //     $this->nilai = $nilai;
+    // }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $materi = $this->materi->with(['mahasiswa', 'prodi', 'nilai'])->get();
+        $materi = materi::all();
         return view('materi.index', compact('materi'));
     }
 
@@ -37,10 +45,8 @@ class MateriController extends Controller
      */
     public function create()
     {
-        $mahasiswa = $this->mahasiswa->all();
-        $prodi = $this->prodi->all();
-        $nilai = $this->nilai->all();
-        return view('materi.create', compact('mahasiswa', 'prodi', 'nilai'));
+        $materi = materi::all();
+        return view('materi.create', compact('mahasiswa, prodi, nilai'));
     }
 
     /**
@@ -48,9 +54,17 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $this->validateRequest($request);
+        // cek apakah user yang mengakses adalah admin
+        if ($request->user()->cannot('create', Materi::class) || $request->user()->cannot('create', Nilai::class)) {
+            // jika tidak, redirect ke route mahasiswa.index dengan pesan error
+            abort(403, 'Unauthorized action');
+        }
 
-        $this->materi->create($validatedData);
+        // memvalidasi input
+        $validatedData = $this->validateRequest($request);
+        // menyimpan data ke database
+        Materi::create($validatedData);
+        // redirect ke route materi.index
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dibuat.');
     }
@@ -69,9 +83,10 @@ class MateriController extends Controller
      */
     public function edit(Materi $materi)
     {
-        $mahasiswa = $this->mahasiswa->all();
-        $prodi = $this->prodi->all();
-        $nilai = $this->nilai->all();
+        $materi = Materi::findOrFail($materi->id);
+        $mahasiswa = Mahasiswa::all();
+        $prodi = Prodi::all();
+        $nilai = Nilai::all();
         return view('materi.edit', compact('materi', 'mahasiswa', 'prodi', 'nilai'));
     }
 
@@ -100,7 +115,7 @@ class MateriController extends Controller
     /**
      * Validate the incoming request data.
      */
-    private function validateRequest(Request $request)
+    public function validateRequest(Request $request)
     {
         return $request->validate([
             'judul' => 'required|string|max:255',

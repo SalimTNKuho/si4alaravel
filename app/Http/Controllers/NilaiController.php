@@ -16,7 +16,7 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilai = Nilai::with(['mahasiswa', 'prodi', 'materi'])->get();
+        $nilai = nilai::all();
         return view('nilai.index', compact('nilai'));
     }
 
@@ -25,9 +25,9 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        $mahasiswa = mahasiswa::all();
-        $prodi = prodi::all();
-        $materi = materi::all();
+        $mahasiswa = Mahasiswa::all();
+        $prodi = Prodi::all();
+        $materi = Materi::all();
         return view('nilai.create', compact('mahasiswa', 'prodi', 'materi'));
     }
 
@@ -53,7 +53,7 @@ class NilaiController extends Controller
      */
     public function show(Nilai $nilai)
     {
-        $nilai->load(['mahasiswa', 'prodi', 'materi']);
+        $nilai->load(['mahasiswa', 'materi']);
         return view('nilai.show', compact('nilai'));
     }
 
@@ -62,9 +62,9 @@ class NilaiController extends Controller
      */
     public function edit(Nilai $nilai)
     {
-        $mahasiswa = mahasiswa::all();
-        $prodi = prodi::all();
-        $materi = materi::all();
+        $mahasiswa = Mahasiswa::all();
+        $prodi = Prodi::all();
+        $materi = Materi::all();
         return view('nilai.edit', compact('nilai', 'mahasiswa', 'prodi', 'materi'));
     }
 
