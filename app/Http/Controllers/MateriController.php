@@ -10,12 +10,25 @@ use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
+    protected $materi;
+    protected $mahasiswa;
+    protected $prodi;
+    protected $nilai;
+
+    public function __construct(Materi $materi, Mahasiswa $mahasiswa, Prodi $prodi, Nilai $nilai)
+    {
+        $this->materi = $materi;
+        $this->mahasiswa = $mahasiswa;
+        $this->prodi = $prodi;
+        $this->nilai = $nilai;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $materi = Materi::with(['mahasiswa', 'prodi', 'nilai'])->get();
+        $materi = $this->materi->with(['mahasiswa', 'prodi', 'nilai'])->get();
         return view('materi.index', compact('materi'));
     }
 
@@ -24,9 +37,9 @@ class MateriController extends Controller
      */
     public function create()
     {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $nilai = Nilai::all();
+        $mahasiswa = $this->mahasiswa->all();
+        $prodi = $this->prodi->all();
+        $nilai = $this->nilai->all();
         return view('materi.create', compact('mahasiswa', 'prodi', 'nilai'));
     }
 
@@ -35,15 +48,9 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'judul' => 'required|string|max:255',
-            'konten' => 'required|string',
-            'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'prodi_id' => 'required|exists:prodi,id',
-            'nilai_id' => 'required|exists:nilai,id',
-        ]);
+        $validatedData = $this->validateRequest($request);
 
-        Materi::create($validatedData);
+        $this->materi->create($validatedData);
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dibuat.');
     }
@@ -62,9 +69,9 @@ class MateriController extends Controller
      */
     public function edit(Materi $materi)
     {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $nilai = Nilai::all();
+        $mahasiswa = $this->mahasiswa->all();
+        $prodi = $this->prodi->all();
+        $nilai = $this->nilai->all();
         return view('materi.edit', compact('materi', 'mahasiswa', 'prodi', 'nilai'));
     }
 
@@ -73,13 +80,7 @@ class MateriController extends Controller
      */
     public function update(Request $request, Materi $materi)
     {
-        $validatedData = $request->validate([
-            'judul' => 'required|string|max:255',
-            'konten' => 'required|string',
-            'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'prodi_id' => 'required|exists:prodi,id',
-            'nilai_id' => 'required|exists:nilai,id',
-        ]);
+        $validatedData = $this->validateRequest($request);
 
         $materi->update($validatedData);
 
@@ -94,5 +95,19 @@ class MateriController extends Controller
         $materi->delete();
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dihapus.');
+    }
+
+    /**
+     * Validate the incoming request data.
+     */
+    private function validateRequest(Request $request)
+    {
+        return $request->validate([
+            'judul' => 'required|string|max:255',
+            'konten' => 'required|string',
+            'mahasiswa_id' => 'required|exists:mahasiswa,id',
+            'prodi_id' => 'required|exists:prodi,id',
+            'nilai_id' => 'required|exists:nilai,id',
+        ]);
     }
 }

@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Materi extends Model
 {
-    protected $fillable = ['judul', 'konten', 'materi_id'];
+    protected $fillable = ['judul', 'konten', 'materi_id', 'author_id']; // Added 'author_id'
+
+    public $timestamps = true; // Enable timestamps
 
     // Define a relationship to the User model
     public function author()
