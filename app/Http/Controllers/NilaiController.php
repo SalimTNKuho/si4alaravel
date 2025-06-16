@@ -16,7 +16,7 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilais = Nilai::with(['mahasiswa', 'prodi', 'materi'])->get();
+        $nilai = Nilai::with(['mahasiswa', 'prodi', 'materi'])->get();
         return view('nilai.index', compact('nilai'));
     }
 
