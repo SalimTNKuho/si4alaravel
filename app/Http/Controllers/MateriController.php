@@ -7,36 +7,18 @@ use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use App\Models\Nilai;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class MateriController extends Controller
 {
-    // protected $materi;
-    // protected $mahasiswa;
-    // protected $prodi;
-    // protected $nilai;
-
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @param Materi $materi
-    //  * @param Mahasiswa $mahasiswa
-    //  * @param Prodi $prodi
-    //  * @param Nilai $nilai
-    //  */
-    // public function __construct(Materi $materi, Mahasiswa $mahasiswa, Prodi $prodi, Nilai $nilai)
-    // {
-    //     $this->materi = $materi;
-    //     $this->mahasiswa = $mahasiswa;
-    //     $this->prodi = $prodi;
-    //     $this->nilai = $nilai;
-    // }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $materi = materi::all();
+        // Load relationships if needed
+        $materi->load(['mahasiswa', 'prodi', 'nilai']);
         return view('materi.index', compact('materi'));
     }
 
@@ -61,9 +43,17 @@ class MateriController extends Controller
         }
 
         // memvalidasi input
-        $validatedData = $this->validateRequest($request);
+        $input = $request->validate([
+            'judul' => 'required|string|max:255',
+            'konten' => 'required|string',
+            'mahasiswa_id' => 'required|exists:mahasiswa,id',
+            'prodi_id' => 'required|exists:prodi,id',
+            'nilai_id' => 'required|exists:nilai,id',
+        ]);
+
         // menyimpan data ke database
-        Materi::create($validatedData);
+        Materi::create($input);
+        
         // redirect ke route materi.index
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dibuat.');
@@ -83,7 +73,7 @@ class MateriController extends Controller
      */
     public function edit(Materi $materi)
     {
-        $materi = Materi::findOrFail($materi->id);
+        $materi = materi::all();
         $mahasiswa = Mahasiswa::all();
         $prodi = Prodi::all();
         $nilai = Nilai::all();
@@ -95,9 +85,21 @@ class MateriController extends Controller
      */
     public function update(Request $request, Materi $materi)
     {
-        $validatedData = $this->validateRequest($request);
+        if ($request->user()->cannot('create', Mahasiswa::class) || $request->user()->cannot('create', Prodi::class)) {
+            // jika tidak, redirect ke route mahasiswa.index dengan pesan error
+            abort(403, 'Unauthorized action');
+        }
 
-        $materi->update($validatedData);
+        // memvalidasi input
+        $input = $request->validate([
+            'judul' => 'required|string|max:255',
+            'konten' => 'required|string',
+            'mahasiswa_id' => 'required|exists:mahasiswa,id',
+            'prodi_id' => 'required|exists:prodi,id',
+            'nilai_id' => 'required|exists:nilai,id',
+        ]);
+        // mencari materi berdasarkan id
+        $materi->update($input);
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil diperbarui.');
     }
@@ -112,17 +114,17 @@ class MateriController extends Controller
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dihapus.');
     }
 
-    /**
-     * Validate the incoming request data.
-     */
-    public function validateRequest(Request $request)
-    {
-        return $request->validate([
-            'judul' => 'required|string|max:255',
-            'konten' => 'required|string',
-            'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'prodi_id' => 'required|exists:prodi,id',
-            'nilai_id' => 'required|exists:nilai,id',
-        ]);
-    }
+    // /**
+    //  * Validate the incoming request data.
+    //  */
+    // public function validateRequest(Request $request)
+    // {
+    //     return $request->validate([
+    //         'judul' => 'required|string|max:255',
+    //         'konten' => 'required|string',
+    //         'mahasiswa_id' => 'required|exists:mahasiswa,id',
+    //         'prodi_id' => 'required|exists:prodi,id',
+    //         'nilai_id' => 'required|exists:nilai,id',
+    //     ]);
+    // }
 }
