@@ -12,12 +12,12 @@ class Nilai extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['mahasiswa_id', 'materi_id', 'nilai'];
 
-    public function student()
+    public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
-    public function subject()
+    public function materi()
     {
         return $this->belongsTo(Materi::class, 'materi_id');
     }
