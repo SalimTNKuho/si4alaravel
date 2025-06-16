@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
@@ -290,26 +289,38 @@
             >
             <li class="nav-item">
                 <a class='nav-link' href='{{ url('dashboard') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                  <i class="nav-icon bi bi-house-door"></i> <!-- Updated icon -->
                   <p>Dashboard</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('fakultas') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                  <i class="nav-icon bi bi-building"></i> <!-- Updated icon -->
                   <p>Fakultas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('prodi') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                  <i class="nav-icon bi bi-journal"></i> <!-- Updated icon -->
                   <p>Prodi</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('mahasiswa') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                  <i class="nav-icon bi bi-person"></i> <!-- Updated icon -->
                   <p>Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('nilai') }}'>
+                  <i class="nav-icon bi bi-bar-chart"></i>
+                  <p>Nilai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('materi') }}'>
+                  <i class="nav-icon bi bi-book"></i>
+                  <p>Materi</p>
                 </a>
               </li>
             </ul>
