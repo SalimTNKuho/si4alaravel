@@ -25,9 +25,12 @@ class MateriController extends Controller
      */
     public function create()
     {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        return view('materi.create', compact('mahasiswa', 'prodi')); // Pass related data for the form
+        $materi = Materi::all(); // Fetch all materi for the create view
+        if (auth()->user()->cannot('create', Materi::class)) {
+            abort(403, 'Unauthorized action');
+        }
+
+        return view('materi.create');
     }
 
     /**
@@ -43,8 +46,6 @@ class MateriController extends Controller
             'nama_materi' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
-            'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'prodi_id' => 'required|exists:prodi,id',
         ]);
 
         Materi::create($input);
@@ -67,9 +68,7 @@ class MateriController extends Controller
     public function edit($id)
     {
         $materi = Materi::findOrFail($id); // Use findOrFail
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        return view('materi.edit', compact('materi', 'mahasiswa', 'prodi')); // Pass related data for the form
+        return view('materi.edit', compact('materi')); // Simplified to only pass the materi
     }
 
     /**
@@ -87,8 +86,6 @@ class MateriController extends Controller
             'nama_materi' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
-            'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'prodi_id' => 'required|exists:prodi,id',
         ]);
 
         $materi->update($input);
