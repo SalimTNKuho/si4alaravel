@@ -25,9 +25,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($materi as $index => $item)
+                            @foreach ($materi as $item)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $item->judul }}</td>
                                     <td>{{ $item->deskripsi }}</td>
                                     <td>
@@ -47,7 +46,7 @@
                                 <tr>
                                     <td colspan="4" class="text-center">Data tidak tersedia</td>
                                 </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
