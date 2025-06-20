@@ -323,7 +323,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ url('materi') }}'>
+                <a class='nav-link' href='{{ route('materi.index') }}'>
                   <i class="nav-icon bi bi-book"></i>
                   <p>
                     Materi

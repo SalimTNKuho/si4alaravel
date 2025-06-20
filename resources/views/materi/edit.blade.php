@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Materi')
+@section('title', 'Edit Materi')
 
 @section('content')
 <div class="container">
@@ -8,16 +8,23 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="title">Judul</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $materi->title) }}" placeholder="Masukkan judul materi" required>
-            @error('title')
+            <label for="judul">Judul</label>
+            <input type="text" name="judul" id="judul" class="form-control" value="{{ old('judul', $materi->judul) }}" placeholder="Masukkan judul materi" required>
+            @error('judul')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
         <div class="form-group">
-            <label for="content">Konten</label>
-            <textarea name="content" id="content" class="form-control" rows="5" placeholder="Masukkan konten materi" required>{{ old('content', $materi->content) }}</textarea>
-            @error('content')
+            <label for="nama_materi">Nama Materi</label>
+            <input type="text" name="nama_materi" id="nama_materi" class="form-control" value="{{ old('nama_materi', $materi->nama_materi) }}" placeholder="Masukkan nama materi" required>
+            @error('nama_materi')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="konten">Konten</label>
+            <textarea name="konten" id="konten" class="form-control" rows="5" placeholder="Masukkan konten materi" required>{{ old('konten', $materi->konten) }}</textarea>
+            @error('konten')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>

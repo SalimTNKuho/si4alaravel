@@ -22,20 +22,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($materi as $item)
+                                @if ($materi->isEmpty())
                                     <tr>
-                                        <td>{{ $item->judul }}</td>
-                                        <td>{{ $item->deskripsi }}</td>
-                                        <td>
-                                            <a href="{{ route('materi.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('materi.destroy', $item->id) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                            </form>
-                                        </td>
+                                        <td colspan="3" class="text-center">Data tidak tersedia</td>
                                     </tr>
-                                @endforeach
+                                @else
+                                    @foreach ($materi as $item)
+                                        <tr>
+                                            <td>{{ $item->judul }}</td>
+                                            <td>{{ $item->nama_materi }}</td>
+                                            <td>{{ $item->konten }}</td>
+                                            <td>
+                                                <a href="{{ route('materi.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('materi.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

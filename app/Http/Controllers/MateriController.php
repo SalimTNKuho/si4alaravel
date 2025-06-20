@@ -16,8 +16,7 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $materi = Materi::findOrFail(1); // Use findOrFail to ensure the resource exists
-        $materi = Materi::with(['mahasiswa', 'prodi']);
+        $materi = Materi::all(); // Fetch all materi without author relationship
         return view('materi.index', compact('materi'));
     }
 
