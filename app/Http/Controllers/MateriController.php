@@ -16,7 +16,8 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $materi = Materi::with(['mahasiswa', 'prodi'])->paginate(10); // Use pagination and eager load relationships
+        $materi = Materi::findOrFail(1); // Use findOrFail to ensure the resource exists
+        $materi = Materi::with(['mahasiswa', 'prodi']);
         return view('materi.index', compact('materi'));
     }
 
