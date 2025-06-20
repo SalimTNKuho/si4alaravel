@@ -16,9 +16,7 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $materi = materi::all();
-        // Load relationships if needed
-        $materi->load(['mahasiswa', 'prodi', 'nilai']);
+        $materi = Materi::with(['mahasiswa', 'prodi'])->paginate(10); // Use pagination and eager load relationships
         return view('materi.index', compact('materi'));
     }
 
@@ -27,8 +25,9 @@ class MateriController extends Controller
      */
     public function create()
     {
-        $materi = materi::all();
-        return view('materi.create', compact('mahasiswa, prodi, nilai'));
+        $mahasiswa = Mahasiswa::all();
+        $prodi = Prodi::all();
+        return view('materi.create', compact('mahasiswa', 'prodi')); // Pass related data for the form
     }
 
     /**
@@ -36,25 +35,19 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
-        // cek apakah user yang mengakses adalah admin
-        if ($request->user()->cannot('create', Materi::class) || $request->user()->cannot('create', Nilai::class)) {
-            // jika tidak, redirect ke route mahasiswa.index dengan pesan error
+        if ($request->user()->cannot('create', Materi::class)) {
             abort(403, 'Unauthorized action');
         }
 
-        // memvalidasi input
         $input = $request->validate([
+            'nama_materi' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
             'prodi_id' => 'required|exists:prodi,id',
-            'nilai_id' => 'required|exists:nilai,id',
         ]);
 
-        // menyimpan data ke database
         Materi::create($input);
-        
-        // redirect ke route materi.index
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dibuat.');
     }
@@ -62,43 +55,42 @@ class MateriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Materi $materi)
+    public function show($id)
     {
-        $materi->load(['mahasiswa', 'prodi', 'nilai']);
+        $materi = Materi::with(['mahasiswa', 'prodi'])->findOrFail($id); // Use findOrFail
         return view('materi.show', compact('materi'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Materi $materi)
+    public function edit($id)
     {
-        $materi = materi::all();
+        $materi = Materi::findOrFail($id); // Use findOrFail
         $mahasiswa = Mahasiswa::all();
         $prodi = Prodi::all();
-        $nilai = Nilai::all();
-        return view('materi.edit', compact('materi', 'mahasiswa', 'prodi', 'nilai'));
+        return view('materi.edit', compact('materi', 'mahasiswa', 'prodi')); // Pass related data for the form
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Materi $materi)
+    public function update(Request $request, $id)
     {
-        if ($request->user()->cannot('create', Mahasiswa::class) || $request->user()->cannot('create', Prodi::class)) {
-            // jika tidak, redirect ke route mahasiswa.index dengan pesan error
+        $materi = Materi::findOrFail($id); // Use findOrFail
+
+        if ($request->user()->cannot('update', Materi::class)) {
             abort(403, 'Unauthorized action');
         }
 
-        // memvalidasi input
         $input = $request->validate([
+            'nama_materi' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
             'prodi_id' => 'required|exists:prodi,id',
-            'nilai_id' => 'required|exists:nilai,id',
         ]);
-        // mencari materi berdasarkan id
+
         $materi->update($input);
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil diperbarui.');
@@ -107,24 +99,11 @@ class MateriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Materi $materi)
+    public function destroy($id)
     {
+        $materi = Materi::findOrFail($id); // Use findOrFail
         $materi->delete();
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dihapus.');
     }
-
-    // /**
-    //  * Validate the incoming request data.
-    //  */
-    // public function validateRequest(Request $request)
-    // {
-    //     return $request->validate([
-    //         'judul' => 'required|string|max:255',
-    //         'konten' => 'required|string',
-    //         'mahasiswa_id' => 'required|exists:mahasiswa,id',
-    //         'prodi_id' => 'required|exists:prodi,id',
-    //         'nilai_id' => 'required|exists:nilai,id',
-    //     ]);
-    // }
 }

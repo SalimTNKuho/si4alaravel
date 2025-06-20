@@ -2,50 +2,56 @@
 @section('title', 'Nilai')
 
 @section('content')
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Create Nilai</h1>
+    <!--begin::Row-->
+    <div class="row">
+        <div class="col-12">
+        <div class="card card-primary card-outline mb-4">
+            <!--begin::Header-->
+            <div class="card-header"><div class="card-title">Tambah Nilai</div></div>
+            <!--end::Header-->
+            <!--begin::Form-->
+            <form action="{{ route('nilai.store') }}" method="POST">
+            @csrf 
+            <!--begin::Body-->
+            <div class="card-body">
+                <div class="mb-3">
+                <label for="nilai" class="form-label">Nilai</label>
+                <input type="number" class="form-control" name="nilai" value="{{ old('nilai') }}">
+                @error('nilai')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Create Nilai</li>
-                    </ol>
+                
+                <div class="mb-3">
+                <label for="keterangan" class="form-label">Keterangan</label>
+                <input type="text" class="form-control" name="keterangan" value="{{ old('keterangan') }}">
+                @error('keterangan')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                </div>
+
+                <div class="mb-3">
+                <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
+                <select class="form-control" name="mahasiswa_id">
+                    @foreach ($mahasiswa as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+                @error('mahasiswa_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="content">
-        <div class="container-fluid">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Form Input Nilai</h3>
-                </div>
-                <form action="{{ route('nilai.store') }}" method="POST">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="student_id">Student ID</label>
-                            <input type="text" name="mahasiswa_id" id="mahasiswa_id" class="form-control" placeholder="Enter Student ID" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Konten</label>
-                            <input type="text" name="materi_id" id="materi_id" class="form-control" placeholder="Enter Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="score">Nilai</label>
-                            <input type="number" name="nilai_id" id="nilai_id" class="form-control" placeholder="Enter Score" required>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('nilai.index') }}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
+            <!--end::Body-->
+            <!--begin::Footer-->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <!--end::Footer-->
+            </form>
+            <!--end::Form-->
+        </div>
         </div>
     </div>
-</div>
+    <!--end::Row-->
 @endsection

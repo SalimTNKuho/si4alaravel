@@ -2,48 +2,69 @@
 @section('title', 'Nilai')
 
 @section('content')
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Edit Nilai</h1>
+    <!--begin::Row-->
+    <div class="row">
+        <div class="col-12">
+        <div class="card card-primary card-outline mb-4">
+            <!--begin::Header-->
+            <div class="card-header"><div class="card-title">Ubah Nilai</div></div>
+            <!--end::Header-->
+            <!--begin::Form-->
+            <form action="{{ route('nilai.update', $nilai->id) }}" method="POST">
+            @csrf 
+            @method('PUT')
+            <!--begin::Body-->
+            <div class="card-body">
+                <div class="mb-3">
+                <label for="nilai" class="form-label">nilai</label>
+                <input type="text" class="form-control" name="nilai" value="{{ old('nilai') ? old('nilai') : $prodi->nama }}">
+                @error('nilai')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('nilai.store') }}">Nilai</a></li>
-                        <li class="breadcrumb-item active">Edit Nilai</li>
-                    </ol>
+                
+                <div class="mb-3">
+                <label for="keterangan" class="form-label">keterangan</label>
+                <input type="text" class="form-control" name="keterangan" value="{{ old('keterangan') ? old('keterangan') : $prodi->singkatan }}">
+                @error('keterangan')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                </div>
+                
+                <div class="mb-3">
+                <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
+                <select class="form-control" name="mahasiswa_id">
+                    @foreach ($mahasiswa as $item)
+                        <option value="{{ $item->id }}" {{ old('mahasiswa_id') == $item->id ? 'selected' : ($mahasiswa->mahasiswa_id == $item->id ? 'selected' : null) }}>{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+                @error('mahasiswa_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                </div>
+
+                <div class="mb-3">
+                <label for="materi_id" class="form-label">Materi</label>
+                <select class="form-control" name="materi_id">
+                    @foreach ($materi as $item)
+                        <option value="{{ $item->id }}" {{ old('materi_id') == $item->id ? 'selected' : ($materi->materi_id == $item->id ? 'selected' : null) }}>{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+                @error('materi_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Form Edit Nilai</h3>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('nilai.update', $nilai->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" value="{{ $nilai->nama }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="nilai">Nilai</label>
-                            <input type="number" name="nilai" id="nilai" class="form-control" value="{{ $nilai->nilai }}" required>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('nilai.index') }}" class="btn btn-secondary">Batal</a>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                </div>
+            <!--end::Body-->
+            <!--begin::Footer-->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <!--end::Footer-->
+            </form>
+            <!--end::Form-->
+        </div>
         </div>
     </div>
-</div>
+    <!--end::Row-->
 @endsection

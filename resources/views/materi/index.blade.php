@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($materi as $item)
+                            @forelse($materi as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->judul }}</td>
@@ -43,14 +43,17 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="4" class="text-center">Data tidak tersedia</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer">
                     <nav aria-label="Pagination">
                         <ul class="pagination pagination-sm justify-content-end m-0">
-                            {{-- Add pagination links if necessary --}}
                             {{ $materi->links('vendor.pagination.bootstrap-4') }}
                         </ul>
                     </nav>
