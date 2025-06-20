@@ -26,10 +26,6 @@ class MateriController extends Controller
     public function create()
     {
         $materi = Materi::all(); // Fetch all materi for the create view
-        if (auth()->user()->cannot('create', Materi::class)) {
-            abort(403, 'Unauthorized action');
-        }
-
         return view('materi.create');
     }
 
