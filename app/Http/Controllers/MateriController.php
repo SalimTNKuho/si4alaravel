@@ -36,12 +36,13 @@ class MateriController extends Controller
             'konten' => 'required|string',
         ]);
 
-        // Create a new materi instance and fill it with validated data
-        $materi = new Materi();
-        $materi->fill($input);
-        // Save the materi to the database
-        $materi->save();
-        // Redirect to the materi index with a success message
+        Materi::create($input);
+        // // Create a new materi instance and fill it with validated data
+        // $materi = new Materi();
+        // $materi->fill($input);
+        // // Save the materi to the database
+        // $materi->save();
+        // // Redirect to the materi index with a success message
 
         return redirect()->route('materi.index')->with('success', 'Materi berhasil dibuat.');
     }
