@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nilai;
 use App\Models\Mahasiswa;
-use App\Models\Prodi;
-use App\Models\Materi;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class NilaiController extends Controller
 {
@@ -16,7 +13,7 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilai = nilai::all();
+        $nilai = Nilai::with('mahasiswa', 'materi')->get();
         return view('nilai.index', compact('nilai'));
     }
 
@@ -26,9 +23,7 @@ class NilaiController extends Controller
     public function create()
     {
         $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $materi = Materi::all();
-        return view('nilai.create', compact('mahasiswa', 'prodi', 'materi'));
+        return view('nilai.create', compact('mahasiswa'));
     }
 
     /**
@@ -36,16 +31,14 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $input = $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'dosen_id' => 'required|exists:dosen,id',
             'materi_id' => 'required|exists:materi,id',
             'nilai' => 'required|numeric|min:0|max:100',
         ]);
 
-        nilai::create($validatedData);
-
-        return redirect()->route('nilai.index')->with('success', 'Nilai created successfully.');
+        Nilai::create($input);
+        return redirect()->route('nilai.index')->with('success', 'Nilai berhasil ditambahkan.');
     }
 
     /**
@@ -63,9 +56,7 @@ class NilaiController extends Controller
     public function edit(Nilai $nilai)
     {
         $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $materi = Materi::all();
-        return view('nilai.edit', compact('nilai', 'mahasiswa', 'prodi', 'materi'));
+        return view('nilai.edit', compact('nilai', 'mahasiswa'));
     }
 
     /**
@@ -73,16 +64,14 @@ class NilaiController extends Controller
      */
     public function update(Request $request, Nilai $nilai)
     {
-        $validatedData = $request->validate([
+        $input = $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
-            'dosen_id' => 'required|exists:dosen,id',
             'materi_id' => 'required|exists:materi,id',
             'nilai' => 'required|numeric|min:0|max:100',
         ]);
 
-        $nilai->update($validatedData);
-
-        return redirect()->route('nilai.index')->with('success', 'Nilai updated successfully.');
+        $nilai->update($input);
+        return redirect()->route('nilai.index')->with('success', 'Nilai berhasil diperbarui.');
     }
 
     /**
@@ -91,7 +80,6 @@ class NilaiController extends Controller
     public function destroy(Nilai $nilai)
     {
         $nilai->delete();
-
-        return redirect()->route('nilai.index')->with('success', 'Nilai deleted successfully.');
+        return redirect()->route('nilai.index')->with('success', 'Nilai berhasil dihapus.');
     }
 }

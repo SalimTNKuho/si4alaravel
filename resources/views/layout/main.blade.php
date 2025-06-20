@@ -287,40 +287,50 @@
               role="menu"
               data-accordion="false"
             >
-            <li class="nav-item">
+              <li class="nav-item">
                 <a class='nav-link' href='{{ url('dashboard') }}'>
-                  <i class="nav-icon bi bi-house-door"></i> <!-- Updated icon -->
+                  <i class="nav-icon bi bi-house-door"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('fakultas') }}'>
-                  <i class="nav-icon bi bi-building"></i> <!-- Updated icon -->
+                  <i class="nav-icon bi bi-building"></i>
                   <p>Fakultas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('prodi') }}'>
-                  <i class="nav-icon bi bi-journal"></i> <!-- Updated icon -->
+                  <i class="nav-icon bi bi-journal"></i>
                   <p>Prodi</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('mahasiswa') }}'>
-                  <i class="nav-icon bi bi-person"></i> <!-- Updated icon -->
+                  <i class="nav-icon bi bi-person"></i>
                   <p>Mahasiswa</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('nilai') }}'>
                   <i class="nav-icon bi bi-bar-chart"></i>
-                  <p>Nilai</p>
+                  <p>
+                    Nilai
+                    <span class="badge bg-primary float-end">
+                      {{ \App\Models\Nilai::count() }}
+                    </span>
+                  </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('materi') }}'>
                   <i class="nav-icon bi bi-book"></i>
-                  <p>Materi</p>
+                  <p>
+                    Materi
+                    <span class="badge bg-success float-end">
+                      {{ \App\Models\Materi::count() }}
+                    </span>
+                  </p>
                 </a>
               </li>
             </ul>

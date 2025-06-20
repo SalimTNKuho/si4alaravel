@@ -6,11 +6,15 @@ use App\Models\User;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use App\Models\Fakultas;
+use App\Models\Nilai;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Materi extends Model
 {
-    protected $fillable = ['judul', 'konten', 'materi_id', 'author_id']; // Added 'author_id'
+    use HasFactory;
+
+    protected $fillable = ['nama_materi', 'deskripsi', 'materi_id', 'author_id']; // Updated 'fillable'
 
     protected $table = 'materi'; // Specify the table name if it differs from the model name
     // public $timestamps = true; // Enable timestamps
@@ -34,5 +38,11 @@ class Materi extends Model
     public function fakultas()
     {
         return $this->belongsTo(Fakultas::class);
+    }
+
+    // Relasi ke Nilai
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class);
     }
 }
