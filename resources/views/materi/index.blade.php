@@ -25,38 +25,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($materi as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->judul }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td>
-                                    <a href="{{ route('materi.edit', $item->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <form action="{{ route('materi.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
-                                            <i class="fas fa-trash"></i> Hapus
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                            @forelse ($materi as $index => $item)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $item->judul }}</td>
+                                    <td>{{ $item->deskripsi }}</td>
+                                    <td>
+                                        <a href="{{ route('materi.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ route('materi.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @empty
-                            <tr>
-                                <td colspan="4" class="text-center">Data tidak tersedia</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="4" class="text-center">Data tidak tersedia</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
-                </div>
-                <div class="card-footer">
-                    <nav aria-label="Pagination">
-                        <ul class="pagination pagination-sm justify-content-end m-0">
-                            {{ $materi->links('vendor.pagination.bootstrap-4') }}
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
