@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mata_Kuliah;
+use App\Models\Dosen;
+use App\Models\Sesi;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
@@ -12,7 +15,8 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        //
+        $jadwal = Jadwal::all(); // Fetch all jadwal
+        return view('jadwal.index', compact('jadwal')); // Return the view with jadwal data
     }
 
     /**
@@ -20,7 +24,11 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        //
+        $sesi = Sesi::all(); // Fetch all sesi
+        $dosen = Dosen::all(); // Fetch all users
+        $mata_kuliah = Mata_Kuliah::all(); // Fetch all mata kuliah
+        return view('jadwal.create', compact('sesi', 'dosen', 'mata_kuliah')); // Show the form to create a new jadwal
+        // compact = to pass sesi, user, and mata_kuliah data to the view
     }
 
     /**
@@ -28,7 +36,23 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Mata_Kuliah::class)) {
+            // If the user is not authorized, abort with a 403 error
+            abort(403, 'Unauthorized action');
+        }
+
+        $input = $request->validate([
+            'tahun_akademik' => 'required|max:10',
+            'kode_smt' => 'required|max:10',
+            'kelas' => 'required|max:10',
+            'mata_kuliah_id' => 'required|exists:mata_kuliah,id',
+            'dosen_id' => 'required|exists:dosen,id',
+            'sesi_id' => 'required|exists:sesi,id',
+        ]);
+
+        Jadwal::create($input);
+
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }
 
     /**
@@ -36,7 +60,7 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-        //
+        return view('jadwal.show', compact('jadwal')); // Return the view with jadwal data
     }
 
     /**
@@ -44,7 +68,11 @@ class JadwalController extends Controller
      */
     public function edit(Jadwal $jadwal)
     {
-        //
+        $sesi = Sesi::all(); // Fetch all sesi
+        $dosen = Dosen::all(); // Fetch all users
+        $mata_kuliah = Mata_Kuliah::all(); // Fetch all mata kuliah
+        return view('jadwal.edit', compact('jadwal', 'sesi', 'dosen', 'mata_kuliah')); // Show the form to edit the jadwal
+        // compact = to pass jadwal, sesi, user, and mata_kuliah data to the view
     }
 
     /**
@@ -52,7 +80,23 @@ class JadwalController extends Controller
      */
     public function update(Request $request, Jadwal $jadwal)
     {
-        //
+        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Mata_Kuliah::class)) {
+            // If the user is not authorized, abort with a 403 error
+            abort(403, 'Unauthorized action');
+        }
+
+        $input = $request->validate([
+            'tahun_akademik' => 'required|max:10',
+            'kode_smt' => 'required|max:10',
+            'kelas' => 'required|max:10',
+            'mata_kuliah_id' => 'required|exists:mata_kuliah,id',
+            'dosen_id' => 'required|exists:dosen,id',
+            'sesi_id' => 'required|exists:sesi,id',
+        ]);
+
+        Jadwal::create($input);
+
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }
 
     /**
@@ -60,6 +104,13 @@ class JadwalController extends Controller
      */
     public function destroy(Jadwal $jadwal)
     {
-        //
+        if ($jadwal->mahasiswa()->exists()) {
+            // If the jadwal has associated mahasiswa, abort with a 403 error
+            abort(403, 'Jadwal cannot be deleted because it is associated with mahasiswa.');
+        }
+
+        $jadwal->delete(); // Delete the jadwal
+
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil dihapus.'); // Redirect with success message
     }
 }
