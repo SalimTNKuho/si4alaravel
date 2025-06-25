@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dosen extends Model
 {
+    protected $table = 'dosen'; // nama tabel
+    
     protected $fillable = ['nama', 'nid', 'prodi_id']; // nama tabel
 
     public function prodi()
