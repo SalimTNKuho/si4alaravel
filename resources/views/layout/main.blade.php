@@ -326,13 +326,13 @@
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('jadwalkuliah') }}'>
                   <i class="nav-icon bi bi-calendar"></i>
-                  <p>Jadwal</p>
+                  <p>Jadwalkuliah</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('matakuliah') }}'>
                   <i class="nav-icon bi bi-book"></i>
-                  <p>Mata Kuliah</p>
+                  <p>Matakuliah</p>
                 </a>
               </li>
               <li class="nav-item">
