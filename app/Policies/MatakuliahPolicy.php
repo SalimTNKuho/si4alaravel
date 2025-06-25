@@ -29,7 +29,7 @@ class MatakuliahPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class MatakuliahPolicy
      */
     public function update(User $user, Matakuliah $matakuliah): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class MatakuliahPolicy
      */
     public function delete(User $user, Matakuliah $matakuliah): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**

@@ -29,7 +29,7 @@ class SesiPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class SesiPolicy
      */
     public function update(User $user, Sesi $sesi): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class SesiPolicy
      */
     public function delete(User $user, Sesi $sesi): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**

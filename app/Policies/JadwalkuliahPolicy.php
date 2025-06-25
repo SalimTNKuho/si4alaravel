@@ -29,7 +29,7 @@ class JadwalkuliahPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin' or $user->role === 'dosen';
     }
 
     /**
@@ -37,7 +37,7 @@ class JadwalkuliahPolicy
      */
     public function update(User $user, Jadwalkuliah $jadwalkuliah): bool
     {
-        return false;
+        return $user->role === 'admin' or $user->role === 'dosen';
     }
 
     /**
@@ -45,7 +45,7 @@ class JadwalkuliahPolicy
      */
     public function delete(User $user, Jadwalkuliah $jadwalkuliah): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**

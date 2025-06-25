@@ -29,7 +29,7 @@ class DosenPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class DosenPolicy
      */
     public function update(User $user, Dosen $dosen): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
@@ -45,7 +45,7 @@ class DosenPolicy
      */
     public function delete(User $user, Dosen $dosen): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
     /**
