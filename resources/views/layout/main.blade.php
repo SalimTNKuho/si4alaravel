@@ -313,13 +313,13 @@
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('sesi') }}'>
-                  <i class="nav-icon bi bi-person"></i>
+                  <i class="nav-icon bi bi-clock"></i>
                   <p>Sesi</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('dosen') }}'>
-                  <i class="nav-icon bi bi-person"></i>
+                  <i class="nav-icon bi bi-person-badge"></i>
                   <p>Dosen</p>
                 </a>
               </li>
@@ -331,19 +331,19 @@
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('mata_kuliah') }}'>
-                  <i class="nav-icon bi bi-person"></i>
+                  <i class="nav-icon bi bi-book"></i>
                   <p>Mata Kuliah</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('nilai') }}'>
-                  <i class="nav-icon bi bi-person"></i>
+                  <i class="nav-icon bi bi-bar-chart"></i>
                   <p>Nilai</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('materi') }}'>
-                  <i class="nav-icon bi bi-person"></i>
+                  <i class="nav-icon bi bi-file-earmark-text"></i>
                   <p>Materi</p>
                 </a>
               </li>
