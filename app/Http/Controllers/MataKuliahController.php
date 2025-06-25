@@ -16,7 +16,7 @@ class MataKuliahController extends Controller
     public function index()
     {
         $mata_Kuliah = Mata_Kuliah::all(); // Fetch all mata kuliah
-        return view('mata_kuliah.index', compact('mata__kuliah'));
+        return view('mata_kuliah.index', compact('mata_kuliah'));
     }
 
     /**
@@ -57,7 +57,7 @@ class MataKuliahController extends Controller
      */
     public function show(Mata_Kuliah $mata_Kuliah)
     {
-        return view('mata_kuliah.show', compact('mata__kuliah'));
+        return view('mata_kuliah.show', compact('mata_kuliah'));
         // Show the details of a specific mata kuliah
         // The $mata_Kuliah variable is automatically injected by Laravel's route model binding
     }
@@ -68,7 +68,7 @@ class MataKuliahController extends Controller
     public function edit(Mata_Kuliah $mata_Kuliah)
     {
         $prodi = Prodi::all();
-        return view('mata_kuliah.edit', compact('mata__kuliah', 'prodi'));
+        return view('mata_kuliah.edit', compact('mata_kuliah', 'prodi'));
     }
 
     /**
