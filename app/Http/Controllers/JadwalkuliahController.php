@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Matakuliah;
 use App\Models\Dosen;
 use App\Models\Sesi;
-use App\Models\Jadwal;
+use App\Models\Jadwalkuliah;
 use Illuminate\Http\Request;
 
-class JadwalController extends Controller
+class JadwalkuliahController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $jadwal = Jadwal::all(); // Fetch all jadwal
-        return view('jadwal.index', compact('jadwal')); // Return the view with jadwal data
+        $jadwalkuliah = Jadwalkuliah::all(); // Fetch all jadwal
+        return view('jadwalkuliah.index', compact('jadwalkuliah')); // Return the view with jadwal data
     }
 
     /**
@@ -27,8 +27,7 @@ class JadwalController extends Controller
         $sesi = Sesi::all(); // Fetch all sesi
         $dosen = Dosen::all(); // Fetch all users
         $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
-        return view('jadwal.create', compact('sesi', 'dosen', 'matakuliah')); // Show the form to create a new jadwal
-        // compact = to pass sesi, user, and matakuliah data to the view
+        return view('jadwalkuliah.create', compact('sesi', 'dosen', 'matakuliah')); // Show the form to create a new jadwal
     }
 
     /**
@@ -36,7 +35,7 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Matakuliah::class)) {
+        if ($request->user()->cannot('create', Jadwalkuliah::class) || $request->user()->cannot('create', Matakuliah::class)) {
             // If the user is not authorized, abort with a 403 error
             abort(403, 'Unauthorized action');
         }
@@ -50,7 +49,7 @@ class JadwalController extends Controller
             'sesi_id' => 'required|exists:sesi,id',
         ]);
 
-        Jadwal::create($input);
+        Jadwalkuliah::create($input);
 
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }
@@ -58,29 +57,28 @@ class JadwalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jadwal $jadwal)
+    public function show(Jadwalkuliah $jadwalkuliah)
     {
-        return view('jadwal.show', compact('jadwal')); // Return the view with jadwal data
+        return view('jadwalkuliah.show', compact('jadwalkuliah')); // Return the view with the specific jadwal data
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Jadwal $jadwal)
+    public function edit(Jadwalkuliah $jadwalkuliah)
     {
         $sesi = Sesi::all(); // Fetch all sesi
-        $dosen = Dosen::all(); // Fetch all users
+        $dosen = Dosen::all(); // Fetch all dosen
         $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
-        return view('jadwal.edit', compact('jadwal', 'sesi', 'dosen', 'matakuliah')); // Show the form to edit the jadwal
-        // compact = to pass jadwal, sesi, user, and matakuliah data to the view
+        return view('jadwalkuliah.edit', compact('jadwalkuliah', 'sesi', 'dosen', 'matakuliah')); // Show the form to edit the specified jadwal
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Jadwal $jadwal)
+    public function update(Request $request, Jadwalkuliah $jadwalkuliah)
     {
-        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Matakuliah::class)) {
+        if ($request->user()->cannot('create', Jadwalkuliah::class) || $request->user()->cannot('create', Matakuliah::class)) {
             // If the user is not authorized, abort with a 403 error
             abort(403, 'Unauthorized action');
         }
@@ -94,7 +92,7 @@ class JadwalController extends Controller
             'sesi_id' => 'required|exists:sesi,id',
         ]);
 
-        Jadwal::create($input);
+        Jadwalkuliah::create($input);
 
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }
@@ -102,15 +100,16 @@ class JadwalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jadwal $jadwal)
+    public function destroy(Jadwalkuliah $jadwalkuliah)
     {
-        if ($jadwal->mahasiswa()->exists()) {
+        if ($jadwalkuliah->mahasiswa()->exists()) {
             // If the jadwal has associated mahasiswa, abort with a 403 error
             abort(403, 'Jadwal cannot be deleted because it is associated with mahasiswa.');
         }
 
-        $jadwal->delete(); // Delete the jadwal
+        $jadwalkuliah->delete(); // Delete the jadwal
 
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil dihapus.'); // Redirect with success message
+        return redirect()->route('jadwalkuliah.index')->with('success', 'Jadwal berhasil dihapus.'); // Redirect with success message
     }
+    
 }

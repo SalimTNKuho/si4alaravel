@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Jadwal')
+@section('title', 'Jadwal Kuliah')
 
 @section('content')
     <!--begin::Row-->
@@ -8,7 +8,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title">List Jadwal</h3>
+            <h3 class="card-title">List Jadwal Kuliah</h3>
             <div class="card-tools">
                 <button
                 type="button"
@@ -30,8 +30,8 @@
             </div>
             </div>
             <div class="card-body">
-                @can('create', App\Models\Jadwal::class)
-                    <a href="{{ route('jadwal.create') }}" class="btn btn-primary"> Tambah </a>
+                @can('create', App\Models\Jadwalkuliah::class)
+                    <a href="{{ route('jadwalkuliah.create') }}" class="btn btn-primary"> Tambah </a>
                 @endcan
                 <table>
                     <tr>
@@ -42,20 +42,20 @@
                         <th>Dosen</th>
                         <th>Sesi</th>
                     </tr>
-                @foreach ($jadwal as $item)
+                @foreach ($jadwalkuliah as $item)
                     <tr>
                         <td>{{ $item->tahun_akademik }} </td>
                         <td>{{ $item->kode_smt }} </td>
-                        <td>{{ $item->mata_kuliah->nama }}</td>
+                        <td>{{ $item->matakuliah->nama }}</td>
                         <td>{{ $item->dosen->nama }}</td>
                         <td>{{ $item->sesi->nama }}</td>
                         <td>
-                            <a href="{{ route('jadwal.show', $item->id) }}" class="btn btn-info">Show</a>
+                            <a href="{{ route('jadwalkuliah.show', $item->id) }}" class="btn btn-info">Show</a>
                             @can('update', $item)
-                            <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('jadwalkuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             @endcan
                             @can('delete', $item)
-                            <form action="{{ route('jadwal.destroy', $item->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('jadwalkuliah.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 

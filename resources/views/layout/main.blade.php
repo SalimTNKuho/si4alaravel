@@ -324,7 +324,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ url('jadwal') }}'>
+                <a class='nav-link' href='{{ url('jadwalkuliah') }}'>
                   <i class="nav-icon bi bi-calendar"></i>
                   <p>Jadwal</p>
                 </a>

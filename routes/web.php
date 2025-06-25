@@ -9,7 +9,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\MatakuliahController;
-use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\JadwalkuliahController;
 use App\Http\Controllers\DosenController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +31,7 @@ Route::resource('/materi', MateriController::class);
 Route::resource('/nilai', NilaiController::class);
 Route::resource('/sesi', SesiController::class);
 Route::resource('/mata-kuliah', MatakuliahController::class);
-Route::resource('/jadwal', JadwalController::class);
+Route::resource('/jadwal', JadwalkuliahController::class);
 Route::resource('/dosen', DosenController::class);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
