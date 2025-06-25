@@ -83,7 +83,7 @@ class MatakuliahController extends Controller
 
         $input = $request->validate([
             'kode_mk' => 'required|max:10',
-            'nama' => 'required|max:50',
+            'nama' => 'required|unique:matakuliah',
             'prodi_id' => 'required|exists:prodi,id',
         ]);
 

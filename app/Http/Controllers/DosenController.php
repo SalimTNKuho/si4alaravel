@@ -38,12 +38,12 @@ class DosenController extends Controller
         }
 
         $input = $request->validate([
-            'nama' => 'required|unique:dosen|max:50',
+            'nama' => 'required|unique:dosen',
             'nid' => 'required|max:20',
             'prodi_id' => 'required|exists:prodi,id',
         ]);
 
-        Dosen::create($input);
+        Dosen::create($input); // Create a new dosen with the validated input
 
         return redirect()->route('dosen.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
