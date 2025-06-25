@@ -31,8 +31,8 @@ class MateriController extends Controller
     public function store(Request $request, Materi $materi)
     {
         $input = $request->validate([
-            'nama_materi' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
+            'nama_materi' => 'required|unique:materi|max:255',
             'konten' => 'required|string',
         ]);
 
@@ -69,8 +69,8 @@ class MateriController extends Controller
     public function update(Request $request, Materi $materi)
     {
         $input = $request->validate([
-            'nama_materi' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
+            'nama_materi' => 'required|unique:materi|max:255',
             'konten' => 'required|string',
         ]);
 

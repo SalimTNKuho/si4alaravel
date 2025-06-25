@@ -11,7 +11,8 @@ class Mahasiswa extends Model
 
     protected $fillable = ['nama', 'npm', 'jk', 'tanggal_lahir', 'tempat_lahir', 'asal_sma', 'prodi_id', 'foto'];
 
-    public function mahasiswa(){
+    public function mahasiswa()
+    {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id');
     }
 

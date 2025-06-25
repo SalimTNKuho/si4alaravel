@@ -36,7 +36,7 @@ class SesiController extends Controller
         }
 
         $input = $request->validate([
-            'nama' => 'required|max:50',
+            'nama' => 'required|unique:sesi',
         ]);
 
         Sesi::create($input);
@@ -72,7 +72,7 @@ class SesiController extends Controller
         }
 
         $input = $request->validate([
-            'nama' => 'required|max:50',
+            'nama' => 'required|unique:sesi',
         ]);
 
         Sesi::create($input);

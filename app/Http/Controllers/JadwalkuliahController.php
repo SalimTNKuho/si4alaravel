@@ -33,7 +33,7 @@ class JadwalkuliahController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Jadwalkuliah $jadwalkuliah)
     {
         if ($request->user()->cannot('create', Jadwalkuliah::class) || $request->user()->cannot('create', Matakuliah::class)) {
             // If the user is not authorized, abort with a 403 error
@@ -41,7 +41,7 @@ class JadwalkuliahController extends Controller
         }
 
         $input = $request->validate([
-            'tahun_akademik' => 'required|max:10',
+            'tahun_akademik' => 'required|unique:jadwalkuliah',
             'kode_smt' => 'required|max:10',
             'kelas' => 'required|max:10',
             'matakuliah_id' => 'required|exists:matakuliah,id',
@@ -84,7 +84,7 @@ class JadwalkuliahController extends Controller
         }
 
         $input = $request->validate([
-            'tahun_akademik' => 'required|max:10',
+            'tahun_akademik' => 'required|unique:jadwalkuliah',
             'kode_smt' => 'required|max:10',
             'kelas' => 'required|max:10',
             'matakuliah_id' => 'required|exists:matakuliah,id',

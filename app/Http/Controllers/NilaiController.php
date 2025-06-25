@@ -34,7 +34,7 @@ class NilaiController extends Controller
         $input = $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
             'materi_id' => 'required|exists:materi,id',
-            'nilai' => 'required|numeric|min:0|max:100',
+            'nilai' => 'required|unique:nilai|numeric|min:0|max:100',
         ]);
 
         Nilai::create($input);
@@ -67,7 +67,7 @@ class NilaiController extends Controller
         $input = $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
             'materi_id' => 'required|exists:materi,id',
-            'nilai' => 'required|numeric|min:0|max:100',
+            'nilai' => 'required|unique:nilai|numeric|min:0|max:100',
         ]);
 
         $nilai->update($input);

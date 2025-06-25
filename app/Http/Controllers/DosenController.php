@@ -38,7 +38,7 @@ class DosenController extends Controller
         }
 
         $input = $request->validate([
-            'nama' => 'required|max:50',
+            'nama' => 'required|unique:dosen|max:50',
             'nid' => 'required|max:20',
             'prodi_id' => 'required|exists:prodi,id',
         ]);
@@ -78,7 +78,7 @@ class DosenController extends Controller
         }
 
         $input = $request->validate([
-            'nama' => 'required|max:50',
+            'nama' => 'required|unique:dosen',
             'nid' => 'required|max:20',
             'prodi_id' => 'required|exists:prodi,id',
         ]);
