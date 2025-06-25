@@ -330,7 +330,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ url('mata__kuliah') }}'>
+                <a class='nav-link' href='{{ url('mata_kuliah') }}'>
                   <i class="nav-icon bi bi-book"></i>
                   <p>Mata Kuliah</p>
                 </a>

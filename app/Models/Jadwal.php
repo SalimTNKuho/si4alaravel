@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jadwal extends Model
 {
-    protected $fillable = ['tahun_akademik', 'kode_smt', 'kelas', 'mata_kuliah_id', 'dosen_id', 'sesi_id'];
+    protected $fillable = ['tahun_akademik', 'kode_smt', 'kelas', 'matakuliah_id', 'dosen_id', 'sesi_id'];
 
     public function mataKuliah()
     {
-        return $this->belongsTo(Mata_Kuliah::class, 'mata_kuliah_id', 'id');
+        return $this->belongsTo(Mata_Kuliah::class, 'matakuliah_id', 'id');
     }
     public function dosen()
     {

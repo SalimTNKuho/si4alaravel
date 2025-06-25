@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Prodi;
 use App\Models\User;
 use App\Models\Sesi;
-use App\Models\Mata_Kuliah;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
@@ -15,8 +15,8 @@ class MataKuliahController extends Controller
      */
     public function index()
     {
-        $mata_Kuliah = Mata_Kuliah::all(); // Fetch all mata kuliah
-        return view('mata_kuliah.index', compact('mata_kuliah'));
+        $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
+        return view('matakuliah.index', compact('matakuliah'));
     }
 
     /**
@@ -27,7 +27,7 @@ class MataKuliahController extends Controller
         $sesi = Sesi::all(); // Fetch all sesi
         $user = User::all(); // Fetch all users
         $prodi = Prodi::all(); // Fetch all prodi
-        return view('mata_kuliah.create', compact('prodi')); // Show the form to create a new mata kuliah
+        return view('matakuliah.create', compact('prodi')); // Show the form to create a new mata kuliah
         // compact = to pass prodi data to the view
     }
 
@@ -36,7 +36,7 @@ class MataKuliahController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->cannot('create', Mata_Kuliah::class) || $request->user()->cannot('create', Prodi::class)) {
+        if ($request->user()->cannot('create', Matakuliah::class) || $request->user()->cannot('create', Prodi::class)) {
             // If the user is not authorized, abort with a 403 error
             abort(403, 'Unauthorized action');
         }
@@ -47,36 +47,36 @@ class MataKuliahController extends Controller
             'prodi_id' => 'required|exists:prodi,id',
         ]);
 
-        Mata_Kuliah::create($input);
+        Matakuliah::create($input);
 
-        return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah berhasil ditambahkan.');
+        return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Mata_Kuliah $mata_Kuliah)
+    public function show(Matakuliah $matakuliah)
     {
-        return view('mata_kuliah.show', compact('mata_kuliah'));
+        return view('matakuliah.show', compact('matakuliah'));
         // Show the details of a specific mata kuliah
-        // The $mata_Kuliah variable is automatically injected by Laravel's route model binding
+        // The $matakuliah variable is automatically injected by Laravel's route model binding
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mata_Kuliah $mata_Kuliah)
+    public function edit(Matakuliah $matakuliah)
     {
         $prodi = Prodi::all();
-        return view('mata_kuliah.edit', compact('mata_kuliah', 'prodi'));
+        return view('matakuliah.edit', compact('matakuliah', 'prodi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mata_Kuliah $mata_Kuliah)
+    public function update(Request $request, Matakuliah $matakuliah)
     {
-        if ($request->user()->cannot('create', Mata_Kuliah::class) || $request->user()->cannot('create', Prodi::class)) {
+        if ($request->user()->cannot('create', Matakuliah::class) || $request->user()->cannot('create', Prodi::class)) {
             // If the user is not authorized, abort with a 403 error
             abort(403, 'Unauthorized action');
         }
@@ -87,19 +87,19 @@ class MataKuliahController extends Controller
             'prodi_id' => 'required|exists:prodi,id',
         ]);
 
-        Mata_Kuliah::create($input);
+        Matakuliah::create($input);
 
-        return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah berhasil ditambahkan.');
+        return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah berhasil ditambahkan.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mata_Kuliah $mata_Kuliah)
+    public function destroy(Matakuliah $matakuliah)
     {
-        $mata_Kuliah->delete(); // Delete the mata kuliah
+        $matakuliah->delete(); // Delete the mata kuliah
 
-        return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah berhasil dihapus.');
+        return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah berhasil dihapus.');
         // Redirect to the mata kuliah index with a success message
     }
 }

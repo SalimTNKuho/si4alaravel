@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mata_Kuliah;
+use App\Models\Matakuliah;
 use App\Models\Dosen;
 use App\Models\Sesi;
 use App\Models\Jadwal;
@@ -26,9 +26,9 @@ class JadwalController extends Controller
     {
         $sesi = Sesi::all(); // Fetch all sesi
         $dosen = Dosen::all(); // Fetch all users
-        $mata_kuliah = Mata_Kuliah::all(); // Fetch all mata kuliah
-        return view('jadwal.create', compact('sesi', 'dosen', 'mata_kuliah')); // Show the form to create a new jadwal
-        // compact = to pass sesi, user, and mata_kuliah data to the view
+        $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
+        return view('jadwal.create', compact('sesi', 'dosen', 'matakuliah')); // Show the form to create a new jadwal
+        // compact = to pass sesi, user, and matakuliah data to the view
     }
 
     /**
@@ -36,7 +36,7 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Mata_Kuliah::class)) {
+        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Matakuliah::class)) {
             // If the user is not authorized, abort with a 403 error
             abort(403, 'Unauthorized action');
         }
@@ -45,7 +45,7 @@ class JadwalController extends Controller
             'tahun_akademik' => 'required|max:10',
             'kode_smt' => 'required|max:10',
             'kelas' => 'required|max:10',
-            'mata_kuliah_id' => 'required|exists:mata_kuliah,id',
+            'matakuliah_id' => 'required|exists:matakuliah,id',
             'dosen_id' => 'required|exists:dosen,id',
             'sesi_id' => 'required|exists:sesi,id',
         ]);
@@ -70,9 +70,9 @@ class JadwalController extends Controller
     {
         $sesi = Sesi::all(); // Fetch all sesi
         $dosen = Dosen::all(); // Fetch all users
-        $mata_kuliah = Mata_Kuliah::all(); // Fetch all mata kuliah
-        return view('jadwal.edit', compact('jadwal', 'sesi', 'dosen', 'mata_kuliah')); // Show the form to edit the jadwal
-        // compact = to pass jadwal, sesi, user, and mata_kuliah data to the view
+        $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
+        return view('jadwal.edit', compact('jadwal', 'sesi', 'dosen', 'matakuliah')); // Show the form to edit the jadwal
+        // compact = to pass jadwal, sesi, user, and matakuliah data to the view
     }
 
     /**
@@ -80,7 +80,7 @@ class JadwalController extends Controller
      */
     public function update(Request $request, Jadwal $jadwal)
     {
-        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Mata_Kuliah::class)) {
+        if ($request->user()->cannot('create', Jadwal::class) || $request->user()->cannot('create', Matakuliah::class)) {
             // If the user is not authorized, abort with a 403 error
             abort(403, 'Unauthorized action');
         }
@@ -89,7 +89,7 @@ class JadwalController extends Controller
             'tahun_akademik' => 'required|max:10',
             'kode_smt' => 'required|max:10',
             'kelas' => 'required|max:10',
-            'mata_kuliah_id' => 'required|exists:mata_kuliah,id',
+            'matakuliah_id' => 'required|exists:matakuliah,id',
             'dosen_id' => 'required|exists:dosen,id',
             'sesi_id' => 'required|exists:sesi,id',
         ]);
