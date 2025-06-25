@@ -30,8 +30,8 @@
             </div>
             </div>
             <div class="card-body">
-                @can('create', App\Models\Mata_Kuliah::class)
-                    <a href="{{ route('mata_kuliah.create') }}" class="btn btn-primary"> Tambah </a>
+                @can('create', App\Models\Matakuliah::class)
+                    <a href="{{ route('matakuliah.create') }}" class="btn btn-primary"> Tambah </a>
                 @endcan
                 <table>
                     <tr>
@@ -39,18 +39,18 @@
                         <th>Nama MK</th>
                         <th>Program Studi</th>
                     </tr>
-                @foreach ($mata_Kuliah as $item)
+                @foreach ($matakuliah as $item)
                     <tr>
                         <td>{{ $item->kode_mk }} </td>
                         <td>{{ $item->nama }} </td>
                         <td>{{ $item->prodi->nama }}</td>
                         <td>
-                            <a href="{{ route('mata_kuliah.show', $item->id) }}" class="btn btn-info">Show</a>
+                            <a href="{{ route('matakuliah.show', $item->id) }}" class="btn btn-info">Show</a>
                             @can('update', $item)
-                            <a href="{{ route('mata_kuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             @endcan
                             @can('delete', $item)
-                            <form action="{{ route('mata_kuliah.destroy', $item->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('matakuliah.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 

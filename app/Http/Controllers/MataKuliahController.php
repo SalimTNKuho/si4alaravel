@@ -8,7 +8,7 @@ use App\Models\Sesi;
 use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
-class MataKuliahController extends Controller
+class MatakuliahController extends Controller
 {
     /**
      * Display a listing of the resource.
