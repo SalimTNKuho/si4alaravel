@@ -87,7 +87,7 @@ class MatakuliahController extends Controller
             'prodi_id' => 'required|exists:prodi,id',
         ]);
 
-        Matakuliah::create($input);
+        $matakuliah->update($input); // Update the mata kuliah with the validated input
 
         return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah berhasil ditambahkan.');
     }

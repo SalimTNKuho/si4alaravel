@@ -92,7 +92,7 @@ class JadwalkuliahController extends Controller
             'sesi_id' => 'required|exists:sesi,id',
         ]);
 
-        Jadwalkuliah::create($input);
+        $jadwalkuliah->update($input); // Update the jadwal with the validated input
 
         return redirect()->route('jadwalkuliah.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }

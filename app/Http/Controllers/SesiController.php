@@ -75,7 +75,7 @@ class SesiController extends Controller
             'nama' => 'required|unique:sesi',
         ]);
 
-        Sesi::create($input);
+        $sesi->update($input); // Update the sesi with validated input
 
         return redirect()->route('sesi.index')->with('success', 'Sesi berhasil ditambahkan.');
     }

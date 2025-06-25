@@ -71,6 +71,7 @@ class NilaiController extends Controller
         ]);
 
         $nilai->update($input);
+        
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil diperbarui.');
     }
 
