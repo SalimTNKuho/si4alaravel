@@ -51,7 +51,7 @@ class JadwalkuliahController extends Controller
 
         Jadwalkuliah::create($input);
 
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
+        return redirect()->route('jadwalkuliah.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }
 
     /**
@@ -94,7 +94,7 @@ class JadwalkuliahController extends Controller
 
         Jadwalkuliah::create($input);
 
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
+        return redirect()->route('jadwalkuliah.index')->with('success', 'Jadwal berhasil ditambahkan.');
     }
 
     /**
