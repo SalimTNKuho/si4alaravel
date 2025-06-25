@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('jk', ['L', 'P']); // pilihan ganda pakai 'enum' seperti pilihan "jenis kelamin" ini
             $table->date('tanggal_lahir'); // tanggal lahir pakai 'date'
             $table->String('tempat_lahir', 30);
-            $table->String('asal_sma/smk', 30);
+            $table->String('asal_sma', 30);
             $table->ForeignId('prodi_id')->constrained('prodi')->onDelete('restrict')->onUpdate('restrict');
             $table->String('foto', 50)->nullable(); // foto pakai '->nullable()' supaya bisa kosong/tidak wajib
             $table->timestamps();
