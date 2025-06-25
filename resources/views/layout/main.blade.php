@@ -312,25 +312,39 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ url('nilai') }}'>
-                  <i class="nav-icon bi bi-bar-chart"></i>
-                  <p>
-                    Nilai
-                    <span class="badge bg-primary float-end">
-                      {{ \App\Models\Nilai::count() }}
-                    </span>
-                  </p>
+                <a class='nav-link' href='{{ url('sesi') }}'>
+                  <i class="nav-icon bi bi-person"></i>
+                  <p>Sesi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ route('materi.index') }}'>
-                  <i class="nav-icon bi bi-book"></i>
-                  <p>
-                    Materi
-                    <span class="badge bg-success float-end">
-                      {{ \App\Models\Materi::count() }}
-                    </span>
-                  </p>
+                <a class='nav-link' href='{{ url('dosen') }}'>
+                  <i class="nav-icon bi bi-person"></i>
+                  <p>Dosen</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('jadwal') }}'>
+                  <i class="nav-icon bi bi-calendar"></i>
+                  <p>Jadwal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('mata_kuliah') }}'>
+                  <i class="nav-icon bi bi-person"></i>
+                  <p>Mata Kuliah</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('nilai') }}'>
+                  <i class="nav-icon bi bi-person"></i>
+                  <p>Nilai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('materi') }}'>
+                  <i class="nav-icon bi bi-person"></i>
+                  <p>Materi</p>
                 </a>
               </li>
             </ul>
