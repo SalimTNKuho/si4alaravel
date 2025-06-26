@@ -17,7 +17,8 @@
                             <thead>
                                 <tr>
                                     <th>Judul</th>
-                                    <th>Deskripsi</th>
+                                    <th>Nama Materi</th>
+                                    <th>Konten</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

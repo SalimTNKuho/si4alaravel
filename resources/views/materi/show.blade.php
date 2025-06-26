@@ -1,5 +1,5 @@
 @extends('layout.main') {{-- Assuming AdminLTE 4 layout is named 'main' --}}
-@section('title', 'Nilai')
+@section('title', 'Materi')
 
 @section('content')
     <!--begin::Row-->
@@ -8,7 +8,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title">List Nilai</h3>
+            <h3 class="card-title">List Materi</h3>
             <div class="card-tools">
                 <button
                 type="button"
@@ -32,22 +32,18 @@
             <div class="card-body">
                 <table class="table">
                     <tr>
-                        <th>Nilai</th>
-                        <td>{{ $nilai->nilai }}</td>
+                        <th>Judul</th>
+                        <td>{{ $materi->judul }}</td>
                     </tr>
                     <tr>
-                        <th>Keterangan</th>
-                        <td>{{ $nilai->keterangan }}</td>
+                        <th>Nama Materi</th>
+                        <td>{{ $materi->nama_materi }}</td>
                     </tr>
                     <tr>
-                        <th>Mahasiswa</th>
-                        <td>{{ $nilai->mahasiswa->nama }}</td>
+                        <th>Konten</th>
+                        <td>{{ $materi->konten }}</td>
                     </tr>
-                    <tr>
-                        <th>Materi</th>
-                        <td>{{ $nilai->materi->judul }}</td>
-                    </tr>
-                </table>
+                    </table>
             </div>
             <!--end::Footer-->
         </div>

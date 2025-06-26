@@ -16,8 +16,8 @@
             <!--begin::Body-->
             <div class="card-body">
                 <div class="mb-3">
-                <label for="nilai" class="form-label">nilai</label>
-                <input type="text" class="form-control" name="nilai" value="{{ old('nilai') ? old('nilai') : $prodi->nama }}">
+                <label for="Nilai" class="form-label">Nilai</label>
+                <input type="text" class="form-control" name="Nilai" value="{{ old('nilai') ? old('nilai') : $nilai->nilai }}">
                 @error('nilai')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -47,7 +47,7 @@
                 <label for="materi_id" class="form-label">Materi</label>
                 <select class="form-control" name="materi_id">
                     @foreach ($materi as $item)
-                        <option value="{{ $item->id }}" {{ old('materi_id') == $item->id ? 'selected' : ($materi->materi_id == $item->id ? 'selected' : null) }}>{{ $item->nama }}</option>
+                        <option value="{{ $item->id }}" {{ old('materi_id') == $item->id ? 'selected' : ($materi->materi_id == $item->id ? 'selected' : null) }}>{{ $item->judul }}</option>
                     @endforeach
                 </select>
                 @error('materi_id')
