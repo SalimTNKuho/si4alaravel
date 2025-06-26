@@ -25,7 +25,7 @@
                 
                 <div class="mb-3">
                 <label for="keterangan" class="form-label">keterangan</label>
-                <input type="text" class="form-control" name="keterangan" value="{{ old('keterangan') ? old('keterangan') : $prodi->singkatan }}">
+                <input type="text" class="form-control" name="keterangan" value="{{ old('keterangan') ? old('keterangan') : $nilai->singkatan }}">
                 @error('keterangan')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -35,7 +35,7 @@
                 <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
                 <select class="form-control" name="mahasiswa_id">
                     @foreach ($mahasiswa as $item)
-                        <option value="{{ $item->id }}" {{ old('mahasiswa_id') == $item->id ? 'selected' : ($mahasiswa->mahasiswa_id == $item->id ? 'selected' : null) }}>{{ $item->nama }}</option>
+                        <option value="{{ $item->id }}" {{ old('mahasiswa_id') == $item->id ? 'selected' : ($nilai->mahasiswa_id == $item->id ? 'selected' : null) }}>{{ $item->nama }}</option>
                     @endforeach
                 </select>
                 @error('mahasiswa_id')
@@ -47,7 +47,7 @@
                 <label for="materi_id" class="form-label">Materi</label>
                 <select class="form-control" name="materi_id">
                     @foreach ($materi as $item)
-                        <option value="{{ $item->id }}" {{ old('materi_id') == $item->id ? 'selected' : ($materi->materi_id == $item->id ? 'selected' : null) }}>{{ $item->judul }}</option>
+                        <option value="{{ $item->id }}" {{ old('materi_id') == $item->id ? 'selected' : ($nilai->materi_id == $item->id ? 'selected' : null) }}>{{ $item->judul }}</option>
                     @endforeach
                 </select>
                 @error('materi_id')
