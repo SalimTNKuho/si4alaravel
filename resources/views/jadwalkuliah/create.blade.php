@@ -10,7 +10,7 @@
             <div class="card-header"><div class="card-title">Tambah Jadwal Kuliah</div></div>
             <!--end::Header-->
             <!--begin::Form-->
-            <form action="{{ route('jadwalkulah.store') }}" method="POST">
+            <form action="{{ route('jadwalkuliah.store') }}" method="POST">
             @csrf 
             <!--begin::Body-->
             <div class="card-body">
