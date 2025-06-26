@@ -24,7 +24,7 @@
                 </div>
                 
                 <div class="mb-3">
-                <label for="kode_smt" class="form-label">Jenis Kelamin</label>
+                <label for="kode_smt" class="form-label">Semester</label>
                 <input type="radio" name="kode_smt" value="Ganjil" {{ old('kode_smt') == 'Ganjil' ? 'checked' : '' }}> Ganjil
                 <input type="radio" name="kode_smt" value="Genap" {{ old('kode_smt') == 'Genap' ? 'checked' : '' }}> Genap 
                 @error('kode_smt')
