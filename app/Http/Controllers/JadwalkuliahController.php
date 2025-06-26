@@ -102,11 +102,6 @@ class JadwalkuliahController extends Controller
      */
     public function destroy(Jadwalkuliah $jadwalkuliah)
     {
-        if ($jadwalkuliah->mahasiswa()->exists()) {
-            // If the jadwal has associated mahasiswa, abort with a 403 error
-            abort(403, 'Jadwal cannot be deleted because it is associated with mahasiswa.');
-        }
-
         $jadwalkuliah->delete(); // Delete the jadwal
 
         return redirect()->route('jadwalkuliah.index')->with('success', 'Jadwal berhasil dihapus.'); // Redirect with success message
