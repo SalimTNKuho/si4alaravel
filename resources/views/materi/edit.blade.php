@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Materi</h1>
-    <form action="{{ route('materi.update', $materi->id) }}" method="POST">
+    <form action="{{ route('materi.update', $materi->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
