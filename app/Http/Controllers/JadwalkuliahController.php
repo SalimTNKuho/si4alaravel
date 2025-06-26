@@ -24,10 +24,10 @@ class JadwalkuliahController extends Controller
      */
     public function create()
     {
-        $sesi = Sesi::all(); // Fetch all sesi
-        $dosen = Dosen::all(); // Fetch all users
         $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
-        return view('jadwalkuliah.create', compact('sesi', 'dosen', 'matakuliah')); // Show the form to create a new jadwal
+        $dosen = Dosen::all(); // Fetch all users
+        $sesi = Sesi::all(); // Fetch all sesi
+        return view('jadwalkuliah.create', compact('matakuliah', 'dosen', 'sesi')); // Show the form to create a new jadwal
     }
 
     /**
@@ -67,10 +67,10 @@ class JadwalkuliahController extends Controller
      */
     public function edit(Jadwalkuliah $jadwalkuliah)
     {
-        $sesi = Sesi::all(); // Fetch all sesi
-        $dosen = Dosen::all(); // Fetch all dosen
         $matakuliah = Matakuliah::all(); // Fetch all mata kuliah
-        return view('jadwalkuliah.edit', compact('jadwalkuliah', 'sesi', 'dosen', 'matakuliah')); // Show the form to edit the specified jadwal
+        $dosen = Dosen::all(); // Fetch all dosen
+        $sesi = Sesi::all(); // Fetch all sesi
+        return view('jadwalkuliah.edit', compact('jadwalkuliah', 'matakuliah', 'dosen', 'sesi')); // Show the form to edit the specified jadwal
     }
 
     /**
