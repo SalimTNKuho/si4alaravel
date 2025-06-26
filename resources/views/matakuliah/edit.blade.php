@@ -10,7 +10,7 @@
             <div class="card-header"><div class="card-title">Ubah Matakuliah</div></div>
             <!--end::Header-->
             <!--begin::Form-->
-            <form action="{{ route('nilai.update', $nilai->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('matakuliah.update', $matakuliah->id) }}" method="POST" enctype="multipart/form-data">
             @csrf 
             @method('PUT')
             <!--begin::Body-->
