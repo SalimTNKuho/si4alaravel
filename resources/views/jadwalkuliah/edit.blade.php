@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="mb-3">
                 <label for="tahun_akademik" class="form-label">Tahun Akademik</label>
-                <input type="text" class="form-control" name="tahun_akademik" value="{{ old('tahun_akademik') ? old('tahun_akademik') : $jadwalkuliah->tahun_akademik }}">
+                <input type="date" class="form-control" name="tahun_akademik" value="{{ old('tahun_akademik') ? old('tahun_akademik') : $jadwalkuliah->tahun_akademik }}">
                 @error('tahun_akademik')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
