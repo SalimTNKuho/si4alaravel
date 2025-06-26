@@ -30,8 +30,8 @@ Route::resource('/mahasiswa', MahasiswaController::class);
 Route::resource('/materi', MateriController::class);
 Route::resource('/nilai', NilaiController::class);
 Route::resource('/sesi', SesiController::class);
-Route::resource('/mata-kuliah', MatakuliahController::class);
-Route::resource('/jadwal', JadwalkuliahController::class);
+Route::resource('/matakuliah', MatakuliahController::class);
+Route::resource('/jadwalkuliah', JadwalkuliahController::class);
 Route::resource('/dosen', DosenController::class);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
