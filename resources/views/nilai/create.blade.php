@@ -46,7 +46,7 @@
                 <label for="materi_id" class="form-label">Materi</label>
                 <select class="form-control" name="materi_id">
                     @foreach ($materi as $item)
-                        <option value="{{ $item->id }}">{{ $item->judul }}</option>
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
                     @endforeach
                 </select>
                 @error('materi_id')

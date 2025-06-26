@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nilai;
 use App\Models\Mahasiswa;
+use App\Models\Materi;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -13,7 +14,7 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilai = Nilai::with('mahasiswa', 'materi')->get();
+        $nilai = Nilai::all(); // Fetch all nilai
         return view('nilai.index', compact('nilai'));
     }
 
@@ -23,7 +24,8 @@ class NilaiController extends Controller
     public function create()
     {
         $mahasiswa = Mahasiswa::all();
-        return view('nilai.create', compact('mahasiswa'));
+        $materi = Materi::all(); // Fetch all materi for the dropdown
+        return view('nilai.create', compact('mahasiswa', 'materi'));
     }
 
     /**
@@ -39,6 +41,7 @@ class NilaiController extends Controller
         ]);
 
         Nilai::create($input);
+
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil ditambahkan.');
     }
 
@@ -57,7 +60,8 @@ class NilaiController extends Controller
     public function edit(Nilai $nilai)
     {
         $mahasiswa = Mahasiswa::all();
-        return view('nilai.edit', compact('nilai', 'mahasiswa'));
+        $materi = Materi::all(); // Fetch all materi for the dropdown
+        return view('nilai.edit', compact('nilai', 'mahasiswa', 'materi'));
     }
 
     /**
@@ -83,6 +87,7 @@ class NilaiController extends Controller
     public function destroy(Nilai $nilai)
     {
         $nilai->delete();
+
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil dihapus.');
     }
 }
