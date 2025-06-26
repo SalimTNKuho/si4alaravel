@@ -8,7 +8,7 @@ class Nilai extends Model
 {
     protected $table = 'nilai';
     protected $primaryKey = 'id';
-    protected $fillable = ['mahasiswa_id', 'materi_id', 'nilai'];
+    protected $fillable = ['nilai', 'keterangan', 'mahasiswa_id', 'materi_id'];
 
     // Relasi ke Mahasiswa
     public function mahasiswa()

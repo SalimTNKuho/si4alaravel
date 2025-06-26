@@ -32,9 +32,10 @@ class NilaiController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
+            'nilai' => 'required|unique:nilai|numeric',
+            'keterangan' => 'required|string|max:255',
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
             'materi_id' => 'required|exists:materi,id',
-            'nilai' => 'required|unique:nilai|numeric|min:0|max:100',
         ]);
 
         Nilai::create($input);
@@ -65,9 +66,10 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $input = $request->validate([
+            'nilai' => 'required|unique:nilai|numeric',
+            'keterangan' => 'required|string|max:255',
             'mahasiswa_id' => 'required|exists:mahasiswa,id',
             'materi_id' => 'required|exists:materi,id',
-            'nilai' => 'required|unique:nilai|numeric|min:0|max:100',
         ]);
 
         $nilai->update($input);
