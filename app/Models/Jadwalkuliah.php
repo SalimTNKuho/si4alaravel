@@ -10,7 +10,7 @@ class Jadwalkuliah extends Model
 
     protected $fillable = ['tahun_akademik', 'kode_smt', 'kelas', 'matakuliah_id', 'dosen_id', 'sesi_id'];
 
-    public function mataKuliah()
+    public function matakuliah()
     {
         return $this->belongsTo(Matakuliah::class, 'matakuliah_id', 'id');
     }
