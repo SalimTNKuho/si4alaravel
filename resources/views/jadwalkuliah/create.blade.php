@@ -25,8 +25,8 @@
                 
                 <div class="mb-3">
                 <label for="smt" class="form-label">Semester</label>
-                <input type="radio" name="kode_smt" value="gj" {{ old('kode_smt') == 'gj' ? 'checked' : '' }}> Ganjil 
-                <input type="radio" name="kode_smt" value="gp" {{ old('kode_smt') == 'gp' ? 'checked' : '' }}> Genap
+                <input type="radio" name="kode_smt" value="Ganjil" {{ old('kode_smt') == 'Ganjil' ? 'checked' : '' }}> Ganjil 
+                <input type="radio" name="kode_smt" value="Genap" {{ old('kode_smt') == 'Genap' ? 'checked' : '' }}> Genap
                 @error('kode_smt')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
