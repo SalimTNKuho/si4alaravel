@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="mb-3">
                 <label for="Nilai" class="form-label">Nilai</label>
-                <input type="text" class="form-control" name="Nilai" value="{{ old('nilai') ? old('nilai') : $nilai->nilai }}">
+                <input type="number" class="form-control" name="Nilai" value="{{ old('nilai') ? old('nilai') : $nilai->nilai }}">
                 @error('nilai')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
