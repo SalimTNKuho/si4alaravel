@@ -25,7 +25,7 @@
                 
                 <div class="mb-3">
                 <label for="keterangan" class="form-label">keterangan</label>
-                <input type="text" class="form-control" name="keterangan" value="{{ old('keterangan') ? old('keterangan') : $nilai->singkatan }}">
+                <input type="text" class="form-control" name="keterangan" value="{{ old('keterangan') ? old('keterangan') : $nilai->keterangan }}">
                 @error('keterangan')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
