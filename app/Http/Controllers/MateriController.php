@@ -32,7 +32,7 @@ class MateriController extends Controller
     {
         $input = $request->validate([
             'judul' => 'required|string|max:255',
-            'nama_materi' => 'required|unique:materi|max:255',
+            'nama_materi' => 'required|unique:materi',
             'konten' => 'required|string',
         ]);
 
@@ -70,7 +70,7 @@ class MateriController extends Controller
     {
         $input = $request->validate([
             'judul' => 'required|string|max:255',
-            'nama_materi' => 'required|unique:materi|max:255',
+            'nama_materi' => 'required|unique:materi',
             'konten' => 'required|string',
         ]);
 
