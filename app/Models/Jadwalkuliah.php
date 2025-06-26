@@ -22,8 +22,4 @@ class Jadwalkuliah extends Model
     {
         return $this->belongsTo(Sesi::class, 'sesi_id', 'id');
     }
-    public function prodi()
-    {
-        return $this->belongsTo(Prodi::class, 'prodi_id', 'id');
-    }
 }
